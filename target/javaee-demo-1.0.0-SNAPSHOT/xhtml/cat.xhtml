@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui"
+      xml:lang="en" lang="en">
+<h:head>
+  <title>CAT demo</title>
+</h:head>
+<body>
+<h:form id="form">
+  <ui:include src="upMenu.xhtml"/>
+  <br/>
+  <p:growl id="growl" showDetail="false"/>
+  <p:toolbar>
+    <p:toolbarGroup>
+      <p:commandButton id="add" icon="pi pi-plus" process="@this" value="Új hozzáadása"
+                       actionListener="#{catCRUDMBean.initSave}" update="@([id$=catForm])"
+                       oncomplete="PF('catDialog').show()"/>
+      <p:commandButton disabled="#{catCRUDMBean.selectedEntity.id==null}" id="delete" icon="pi pi-times"
+                       process="@this" value="Törlés" actionListener="#{catCRUDMBean.remove}" update="@form">
+        <p:confirm header="Törlés" message="Biztos vagy benne?" icon="pi pi-times"/>
+      </p:commandButton>
+      <p:commandButton disabled="#{catCRUDMBean.selectedEntity.id==null}" id="update" process="@this"
+                       value="Módosítás" icon="pi pi-pencil" update="@([id$=catForm])"
+                       oncomplete="PF('catDialog').show()"/>
+    </p:toolbarGroup>
+    <p:toolbarGroup align="right">
+      <p:commandButton id="columntTogglerBtn" icon="pi pi-table"/>
+
+      <p:columnToggler id="columntToggler" trigger="columntTogglerBtn" datasource="table"/>
+
+      <p:commandButton value="XLS" styleClass="p-mr-2 p-mb-2">
+        <p:dataExporter type="xls" target="table" fileName="export"/>
+      </p:commandButton>
+
+      <p:commandButton value="XLXS" styleClass="p-mr-2 p-mb-2">
+        <p:dataExporter type="xlsxstream" target="table" fileName="export"/>
+      </p:commandButton>
+
+      <!-- TODO Utf-8 karakter -->
+      <p:commandButton value="PDF" styleClass="p-mr-2 p-mb-2">
+        <p:dataExporter type="pdf" target="table" fileName="export"/>
+      </p:commandButton>
+    </p:toolbarGroup>
+  </p:toolbar>
+
+  <p:dataTable id="table" paginator="true" value="#{catCRUDMBean.list}" var="cat"
+               selectionMode="single" selection="#{catCRUDMBean.selectedEntity}" rowKey="#{cat.id}"
+               paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+               currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+               rowsPerPageTemplate="5,10,{ShowAll|'All'}">
+    <p:ajax event="rowSelect" update="@form"/>
+    <p:column toggleable="false" sortBy="#{cat.id}" filterBy="#{cat.id}" filterMatchMode="contains"
+              headerText="ID">
+      <h:outputText value="#{cat.id}"/>
+    </p:column>
+    <p:column sortBy="#{cat.legsNumber}" filterBy="#{cat.legsNumber}" headerText="Lábak száma"
+              filterMatchMode="contains">
+      <h:outputText value="#{cat.legsNumber}"/>
+    </p:column>
+    <p:column sortBy="#{cat.name}" filterBy="#{cat.name}" headerText="Name" filterMatchMode="contains">
+      <h:outputText value="#{cat.name}"/>
+    </p:column>
+    <p:column sortBy="#{cat.farmer.fullName}" filterBy="#{cat.farmer.fullName}" headerText="Farmer neve" filterMatchMode="contains">
+      <h:outputText value="#{cat.farmer.fullName}"/>
+    </p:column>
+
+  </p:dataTable>
+  <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">
+    <p:commandButton value="Nem" type="button" styleClass="ui-confirmdialog-no ui-button-flat"/>
+    <p:commandButton value="Igen" type="button" styleClass="ui-confirmdialog-yes"/>
+  </p:confirmDialog>
+</h:form>
+
+<p:dialog id="catDialog" widgetVar="catDialog" header="Form" modal="true" closable="true">
+  <h:form id="catForm">
+    <p:panelGrid layout="grid" columns="2" id="formPanel" style="width: 400px">
+      <p:outputLabel value="Név"/>
+      <p:inputText value="#{catCRUDMBean.selectedEntity.name}" required="true" requiredMessage="Név kötelező"/>
+
+      <p:outputLabel value="Lábak száma"/>
+      <p:inputNumber maxValue="100" thousandSeparator="" decimalPlaces="0"
+                     value="#{catCRUDMBean.selectedEntity.legsNumber}" required="true"
+                     requiredMessage="Lábak száma kötelező"/>
+
+      <p:outputLabel value="Farmer"/>
+      <p:selectOneMenu value="#{catCRUDMBean.selectedEntity.farmer}" converter="#{farmerConverter}">
+        <f:selectItem itemValue="#{null}" itemLabel="Kérem válasszon"/>
+        <f:selectItems value="#{catCRUDMBean.farmerList}" var="farmer" itemLabel="#{farmer.fullName}" itemValue="#{farmer}"/>
+      </p:selectOneMenu>
+      <p:commandButton value="Mentés" icon="pi pi-save" actionListener="#{catCRUDMBean.save()}"
+                       process="formPanel" update=":form"/>
+    </p:panelGrid>
+  </h:form>
+</p:dialog>
+</body>
+</html>

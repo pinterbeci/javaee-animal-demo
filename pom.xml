@@ -6,12 +6,20 @@
     <groupId>hu.ulyssys.java.course</groupId>
     <artifactId>javaee-demo</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <modules>
+        <module>animal-api</module>
+        <module>animal-backend</module>
+        <module>animal-frontend</module>
+        <module>animal-parent</module>
+    </modules>
+    <packaging>pom</packaging>
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
     <dependencies>
+<!--
+        beletettük függőségként az api-t-->
         <dependency>
             <artifactId>javax.servlet-api</artifactId>
             <groupId>javax.servlet</groupId>
@@ -20,10 +28,15 @@
         </dependency>
 
         <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-api</artifactId>
-            <version>8.0</version>
-            <scope>provided</scope>
+            <groupId>hu.ulyssys.java.course</groupId>
+            <artifactId>animal-api</artifactId>
+            <version>1.0.1-SNAPSHOT1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>hu.ulyssys.java.course</groupId>
+            <artifactId>animal-backend</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>

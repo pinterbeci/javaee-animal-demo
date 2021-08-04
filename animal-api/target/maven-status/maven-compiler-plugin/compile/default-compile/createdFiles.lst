@@ -1,0 +1,17 @@
+hu\ulyssys\java\course\maven\entity\entity\AbstractAnimal.class
+hu\ulyssys\java\course\maven\entity\service\SlugService.class
+hu\ulyssys\java\course\maven\entity\service\CoreService.class
+hu\ulyssys\java\course\maven\entity\entity\AbstractEntity.class
+hu\ulyssys\java\course\maven\entity\service\DogService.class
+hu\ulyssys\java\course\maven\entity\service\XLSExportService.class
+hu\ulyssys\java\course\maven\entity\service\PDFExportService.class
+hu\ulyssys\java\course\maven\entity\service\FarmerService.class
+hu\ulyssys\java\course\maven\entity\service\CatService.class
+hu\ulyssys\java\course\maven\entity\entity\Dog.class
+hu\ulyssys\java\course\maven\entity\service\ReindeerService.class
+hu\ulyssys\java\course\maven\entity\entity\Cat.class
+hu\ulyssys\java\course\maven\entity\entity\Slug.class
+hu\ulyssys\java\course\maven\entity\entity\Farmer.class
+hu\ulyssys\java\course\maven\entity\entity\AnimalType.class
+hu\ulyssys\java\course\maven\entity\entity\Reindeer.class
+hu\ulyssys\java\course\maven\entity\entity\AnimalTypeAware.class

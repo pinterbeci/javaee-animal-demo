@@ -6,8 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="animal-backend" />
+        <module name="animal-frontend" />
         <module name="javaee-animald-demo" />
-        <module name="JavaEEAnimalDemo" />
+        <module name="animal-api" />
+        <module name="ear" />
       </profile>
     </annotationProcessing>
   </component>

@@ -1,0 +1,11 @@
+hu\ulyssys\java\course\maven\mbean\SlugCRUDMbean.class
+hu\ulyssys\java\course\maven\servlet\CatTableServlet.class
+hu\ulyssys\java\course\maven\servlet\CatPDFServlet.class
+hu\ulyssys\java\course\maven\servlet\HelloWorldServlet.class
+hu\ulyssys\java\course\maven\mbean\FarmerAwareCRUDMBean.class
+hu\ulyssys\java\course\maven\converter\FarmerConverter.class
+hu\ulyssys\java\course\maven\mbean\ReindeerCRUDMBean.class
+hu\ulyssys\java\course\maven\mbean\DogCRUDMBean.class
+hu\ulyssys\java\course\maven\mbean\FarmerCRUDMBean.class
+hu\ulyssys\java\course\maven\mbean\CatCRUDMBean.class
+hu\ulyssys\java\course\maven\mbean\CoreCRUDMBean.class
